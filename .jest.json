@@ -16,11 +16,11 @@
     "<rootDir>/src/"
   ],
   "globals": {
-    "__PROXY_PORT__": true,
-    "__BITMEX_API_KEY__": true,
-    "__BITMEX_API_SECRET__": true,
+    "__PROXY_PORT__": 0,
+    "__BITMEX_API_KEY__": "",
+    "__BITMEX_API_SECRET__": "",
     "__BITMEX_TESTNET__": true,
-    "__BITMEX_SYMBOLS__": true
+    "__BITMEX_SYMBOLS__": ""
   },
   "setupFiles": [
     "<rootDir>/tests/__mocks__/shim.ts"

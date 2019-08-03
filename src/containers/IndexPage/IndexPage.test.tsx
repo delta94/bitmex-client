@@ -1,11 +1,11 @@
 import "jsdom-global/register";
 import React from "react";
 import * as renderer from "react-test-renderer";
-import NotFoundPage from "./NotFoundPage";
+import IndexPage from "./IndexPage";
 
-describe("NotFoundPage", () => {
+describe("IndexPage", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<NotFoundPage />).toJSON();
+    const tree = renderer.create(<IndexPage />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
