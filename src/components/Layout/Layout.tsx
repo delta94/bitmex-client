@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import s from "./Layout.module.scss";
 
 const Layout: React.FunctionComponent = ({ children }) => (

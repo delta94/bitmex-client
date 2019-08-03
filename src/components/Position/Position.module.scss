@@ -1,6 +1,6 @@
 @import "../../assets/scss/_variables.scss";
 
-.create-order {
+.position {
   display: block;
   margin: 0 0 40px;
 
@@ -10,15 +10,6 @@
   }
 
   &__content {
-    display: flex;
     max-width: 600px;
-
-    &-buy {
-      lost-column: 1/2;
-    }
-
-    &-sell {
-      lost-column: 1/2;
-    }
   }
 }

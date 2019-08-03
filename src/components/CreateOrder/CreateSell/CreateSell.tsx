@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { Intent, Button, NumericInput } from "@blueprintjs/core";
 import { toast } from "../../../utils/toaster";
-import { useBitmexRest } from "../../../utils/bitmex";
+import { useBitmexRest } from "../../../utils/bitmex_rest";
+import { useBitmexState } from "../../../utils/bitmex_state";
 import s from "./CreateSell.module.scss";
 
-type CreateSellType = {
-  symbol: string;
-};
-
-const CreateSell: React.FunctionComponent<CreateSellType> = (props) => {
-  const { symbol } = props;
-  const [amount, setAmount] = useState(0);
-  const rest = useBitmexRest();
+const CreateSell: React.FunctionComponent = () => {
+  const { symbol } = useBitmexState();
+  const { createOrder } = useBitmexRest();
+  const [amount, setAmount] = useState<number>(0);
   const isReady = amount !== 0;
 
   const handleChangeAmount = (newAmount: number) => {
@@ -23,7 +20,7 @@ const CreateSell: React.FunctionComponent<CreateSellType> = (props) => {
 
     try {
       toast.blue({ message: `Sell ${amount} Contracts of ${symbol} at Market.` });
-      const response = await rest.createOrder(symbol, "Market", "Sell", amount);
+      const response = await createOrder(symbol, "Market", "Sell", amount);
       const { data } = response;
       toast.blue({ message: `${data.orderQty} contracts of ${data.symbol} sold at ${data.price}. The order has fully filled.` });
     } catch (error) {

@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { config } from "../../constants";
 import { Helmet } from "react-helmet";
+import { Position } from "../../components/Position";
 import { CreateOrder } from "../../components/CreateOrder";
 import { Sidebar } from "../../components/Sidebar";
 import { Layout } from "../../components/Layout";
 import s from "./IndexPage.module.scss";
 
 const IndexPage: React.FunctionComponent = () => {
-  const symbols = config.bitmex.symbols.split(",");
-  const [symbol, setSymbol] = useState(symbols[0]);
-  const setSymbolCallback = (newSymbol: string) => setSymbol(newSymbol);
-
   return (
     <Layout>
       <Helmet>
@@ -18,15 +15,11 @@ const IndexPage: React.FunctionComponent = () => {
       </Helmet>
       <div className={s["index-page"]}>
         <div className={s["index-page__sidebar"]}>
-          <Sidebar
-            symbol={symbol}
-            setSymbolCallback={setSymbolCallback}
-          />
+          <Sidebar />
         </div>
         <div className={s["index-page__content"]}>
-          <CreateOrder
-            symbol={symbol}
-          />
+          <CreateOrder />
+          <Position />
         </div>
       </div>
     </Layout>

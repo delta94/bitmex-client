@@ -1,32 +1,20 @@
-import * as React from "react";
-import s from "./CreateOrder.module.scss";
+import React from "react";
 import { CreateBuy } from "./CreateBuy";
 import { CreateSell } from "./CreateSell";
+import s from "./CreateOrder.module.scss";
 
-type CreateOrderType = {
-  symbol: string;
-};
-
-const CreateOrder: React.FunctionComponent<CreateOrderType> = (props) => {
-  const { symbol } = props;
-
-  return (
-    <div className={s["create-order"]}>
-      <h1 className={s["create-order__title"]}>Create order</h1>
-      <div className={s["create-order__container"]}>
-        <div className={s["create-order__container-buy"]}>
-          <CreateBuy
-            symbol={symbol}
-          />
-        </div>
-        <div className={s["create-order__container-sell"]}>
-          <CreateSell
-            symbol={symbol}
-          />
-        </div>
+const CreateOrder: React.FunctionComponent = () => (
+  <div className={s["create-order"]}>
+    <h1 className={s["create-order__title"]}>Create order</h1>
+    <div className={s["create-order__content"]}>
+      <div className={s["create-order__content-buy"]}>
+        <CreateBuy />
+      </div>
+      <div className={s["create-order__content-sell"]}>
+        <CreateSell />
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default CreateOrder;

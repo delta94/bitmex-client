@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import httpProxy from "http-proxy";
+import * as https from "https";
 import * as http from "http";
 import { createHmac } from "crypto";
 import * as bodyParser from "body-parser";
@@ -25,6 +26,10 @@ const createBitmexSignature = (request: http.IncomingMessage, body: string, payl
 };
 
 const proxy = httpProxy.createProxyServer();
+
+proxy.on("error", (error: any, request: any, response: http.ServerResponse) => {
+  response.end();
+});
 
 proxy.on("proxyReq", (proxyRequest: http.ClientRequest, request: any) => {
   let body = "";
@@ -64,7 +69,7 @@ app.use((request: http.IncomingMessage, response: http.ServerResponse) => {
   response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader(
     "Access-Control-Allow-Headers",
-    "Content-type, Content-Length,api-expires,api-key,api-signature,bitmex-api-testnet,bitmex-api-key,bitmex-api-secret",
+    "User-Agent, Content-type, Content-Length,api-expires,api-key,api-signature,bitmex-api-testnet,bitmex-api-key,bitmex-api-secret",
   );
   response.setHeader(
     "Access-Control-Allow-Methods",

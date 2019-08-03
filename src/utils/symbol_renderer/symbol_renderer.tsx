@@ -18,7 +18,7 @@ export const renderSymbol: ItemRenderer<string> = (symbol, { handleClick, modifi
   );
 };
 
-export const filterSymbol: ItemPredicate<string> = (query, symbol) => {
+export const filterSymbol: ItemPredicate<string> = (query: string, symbol: string) => {
   return (symbol.toLowerCase()).indexOf(query.toLowerCase()) >= 0;
 };
 

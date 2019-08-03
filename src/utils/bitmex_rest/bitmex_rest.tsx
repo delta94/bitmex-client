@@ -10,20 +10,31 @@ type CreateOrderType = (
   price?: number,
 ) => Promise<AxiosResponse<any>>;
 
+type ClosePositionType = (
+  symbol: string,
+  type: string,
+  side: string,
+  amount: number,
+  price?: number,
+) => Promise<AxiosResponse<any>>;
+
 type GetInstrumentsType = () => Promise<AxiosResponse<any>>;
+type GetPositionType = () => Promise<AxiosResponse<any>>;
 
-type BitmexRestProviderType = {
+interface IBitmexRestProvider {
   children: React.ReactNode;
-};
+}
 
-type BitmexRestContextType = {
+interface IBitmexRestContext {
   createOrder: CreateOrderType;
   getMarkets: GetInstrumentsType;
-};
+  getPosition: GetPositionType;
+  closePosition: ClosePositionType;
+}
 
-const BitmexRestContext: React.Context<BitmexRestContextType | any> = React.createContext({});
+const BitmexRestContext: React.Context<IBitmexRestContext | any> = React.createContext({});
 
-export const BitmexRestProvider: React.FunctionComponent<BitmexRestProviderType> = ({ children }) => {
+export const BitmexRestProvider: React.FunctionComponent<IBitmexRestProvider> = ({ children }) => {
   const http = axios.create({
     baseURL: `${config.proxy.host}:${config.proxy.port}${config.bitmex.basePath}`,
     headers: {
@@ -35,7 +46,7 @@ export const BitmexRestProvider: React.FunctionComponent<BitmexRestProviderType>
     },
   });
 
-  const createOrder = async (symbol: string, type: string, side: string, amount: number, price: number) => {
+  const createOrder = async (symbol: string, type: string, side: string, amount: number, price?: number) => {
     return await http.post("/order", {
       symbol: symbol,
       side: side,
@@ -45,14 +56,27 @@ export const BitmexRestProvider: React.FunctionComponent<BitmexRestProviderType>
     });
   };
 
+  const closePosition = async (symbol: string, price?: number) => {
+    return await http.post("/order/closePosition", {
+      symbol: symbol,
+      price: price,
+    });
+  };
+
   const getInstruments = async () => {
     return await http.get("/instrument/activeAndIndices");
+  };
+
+  const getPosition = async () => {
+    return await http.get("/position");
   };
 
   return (
     <BitmexRestContext.Provider value={{
       createOrder: createOrder,
       getInstruments: getInstruments,
+      getPosition: getPosition,
+      closePosition: closePosition,
     }}>
       {children}
     </BitmexRestContext.Provider>

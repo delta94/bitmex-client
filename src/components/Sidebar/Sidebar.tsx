@@ -1,20 +1,16 @@
 import React from "react";
 import { config } from "../../constants";
-import { useBitmexRest } from "../../utils/bitmex";
+import { useBitmexState } from "../../utils/bitmex_state";
 import { renderSymbol, filterSymbol } from "../../utils/symbol_renderer";
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import s from "./Sidebar.module.scss";
 
-type SidebarType = {
-  symbol: string;
-  setSymbolCallback: (newSymbol: string) => void;
-};
 
-const Sidebar: React.StatelessComponent<SidebarType> = (props) => {
-  const { symbol, setSymbolCallback } = props;
+const Sidebar: React.StatelessComponent = () => {
+  const { symbol, setSymbol } = useBitmexState();
   const symbols = config.bitmex.symbols.toString().split(",");
-  const handleItemSelect = (newSymbol: string) => setSymbolCallback(newSymbol);
+  const handleItemSelect = (newSymbol: string) => setSymbol(newSymbol);
 
   return (
     <div className={s["sidebar"]}>
