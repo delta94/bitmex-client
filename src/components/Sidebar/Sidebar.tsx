@@ -2,7 +2,7 @@ import React from "react";
 import { config } from "../../constants";
 import { useBitmexState } from "../../utils/bitmex_state";
 import { renderSymbol, filterSymbol } from "../../utils/symbol_renderer";
-import { Button, MenuItem } from "@blueprintjs/core";
+import { Button } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import s from "./Sidebar.module.scss";
 
@@ -28,7 +28,6 @@ const Sidebar: React.StatelessComponent = () => {
            filterable={false}
            onItemSelect={handleItemSelect}
            activeItem={symbol}
-           noResults={<MenuItem disabled={true} text={"No currencies."} />}
           >
            <Button text={symbol} rightIcon={"caret-down"} />
         </Select>
