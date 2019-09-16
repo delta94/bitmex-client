@@ -78,7 +78,7 @@
     "style-loader": "1.0.0",
     "stylelint": "10.1.0",
     "stylelint-config-recommended-scss": "3.3.0",
-    "stylelint-order": "3.1.0",
+    "stylelint-order": "3.1.1",
     "stylelint-scss": "3.10.1",
     "jsdom": "15.1.1",
     "jsdom-global": "3.0.2",
