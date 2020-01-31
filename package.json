@@ -60,7 +60,7 @@
     "@types/react-test-renderer": "16.9.2",
     "@types/webpack": "4.32.1",
     "@types/webpack-dev-server": "3.9.0",
-    "autoprefixer": "9.7.3",
+    "autoprefixer": "9.7.4",
     "concurrently": "5.0.2",
     "css-loader": "3.4.2",
     "file-loader": "5.0.2",
